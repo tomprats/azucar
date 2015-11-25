@@ -1,0 +1,36 @@
+.container-fluid
+  .row
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading
+          %h4 New/Edit Group
+        .panel-body
+          = render partial: "form"
+  .row
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading
+          %h4 Groups
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th ID
+              %th Active
+              %th Rank
+              %th Name
+              %th Description
+              %th Created At
+              %th
+          %tbody
+            - @groups.each do |group|
+              %tr
+                %td= group.id
+                %td= group.active ? "Yes" : "No"
+                %td= group.rank
+                %td= group.name
+                %td= group.description
+                %td= group.created_at.strftime("%m/%d/%y %I:%M %p")
+                %td
+                  = link_to "Edit", edit_admin_group_path(group)
+                  &vert;
+                  = link_to "Delete", admin_group_path(group), method: :delete, data: { confirm: "Are you sure you want to delete #{group.name}?" }

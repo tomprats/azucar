@@ -1,0 +1,38 @@
+.container-fluid
+  .row
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading
+          %h4 New/Edit Product
+        .panel-body
+          = render partial: "form"
+  .row
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading
+          %h4 Products
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th ID
+              %th Active
+              %th Rank
+              %th Name
+              %th Price
+              %th Image
+              %th Created At
+              %th
+          %tbody
+            - @products.each do |product|
+              %tr
+                %td= product.id
+                %td= product.active ? "Yes" : "No"
+                %td= product.rank
+                %td= product.name
+                %td= number_to_currency(product.price / 100.0, precision: 2)
+                %td= link_to product.image.url, product.image.url, target: :_blank
+                %td= product.created_at.strftime("%m/%d/%y %I:%M %p")
+                %td
+                  = link_to "Edit", edit_admin_product_path(product)
+                  &vert;
+                  = link_to "Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure you want to delete #{product.name}?" }

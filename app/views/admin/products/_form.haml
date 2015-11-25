@@ -1,0 +1,34 @@
+= form_for [:admin, @product], html: { class: "form-horizontal" } do |f|
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      .checkbox
+        %label
+          = f.check_box :active
+          Active?
+  .form-group
+    = f.label :group_id, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.select :group_id, options_from_collection_for_select(@groups, :id, :name), {}, class: "form-control"
+  .form-group
+    = f.label :rank, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.number_field :rank, placeholder: "Rank", class: "form-control"
+  .form-group
+    = f.label :name, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :name, placeholder: "Name", class: "form-control"
+  .form-group
+    = f.label :price, "Price (in cents)", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.number_field :price, placeholder: "Price (in cents)", class: "form-control"
+  .form-group
+    = f.label :description, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :description, placeholder: "Description", class: "form-control"
+  .form-group
+    = f.label :image, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.file_field :image, class: "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"
